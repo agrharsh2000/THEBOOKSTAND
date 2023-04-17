@@ -63,13 +63,14 @@ closeCart.onclick=()=>{
         var shopproducts=button.parentElement;
         var title=shopproducts.getElementsByClassName("product-title")[0].innerHTML;
         var price=shopproducts.getElementsByClassName("price")[0].innerHTML;
+        var price1=price.replace("FROM","");
         var productimg = shopproducts.getElementsByClassName("product-img")[0].src;
-       addproducttocart(title,price, productimg);
+       addproducttocart(title,price1, productimg);
        updatetotal();
     
     }
 
-    function addproducttocart(title,price,productimg){
+    function addproducttocart(title,price1,productimg){
         var cartbookbox=document.createElement('div');
         cartbookbox.classList.add("cart-box");
         var cartitems = document.getElementsByClassName("cart-content")[0];
@@ -79,13 +80,13 @@ closeCart.onclick=()=>{
 
 
     var cartboxcontent=`
-                        <img src="img/book1.jpg" alt="" class="cart-img">
+                        <img src="${productimg}" alt="" class="cart-img">
                         <div class="detail-box">
-                            <div class="cart-product-title">Book1</div>
+                            <div class="cart-product-title">${title}</div>
                             <p class="cart-desc">Here goes some description about this particular book. That defines why you should buy it.</p>
                             <button class="cart-quantity cart-remove">Will read later</button>
                         </div>
-                        <div class="cart-price">$25</div>`;
+                        <div class="cart-price">${price1}</div>`;
 
     cartbookbox.innerHTML = cartboxcontent;
     cartitems.append(cartbookbox);
