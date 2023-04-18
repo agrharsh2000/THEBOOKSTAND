@@ -50,7 +50,7 @@ function buybuttonclicked(){
         cartcontent.removeChild(cartcontent.firstChild);
     }
     updatetotal();
-}
+    }
     
 
     function removeCartItem(event)
@@ -85,34 +85,52 @@ function buybuttonclicked(){
         var cartbookbox=document.createElement('div');
         cartbookbox.classList.add("cart-box");
         var cartitems = document.getElementsByClassName("cart-content")[0];
-        var cartitemnames= cartitems.getElementsByClassName("cart-product-title");
-      
-    
 
+        // converted html code to javascript code
+        var img = document.createElement("img");
+        img.src = productimg;
+        img.alt = "";
+        img.classList.add("cart-img");
+        cartbookbox.appendChild(img);
 
-    var cartboxcontent=`
-                        <img src="${productimg}" alt="" class="cart-img">
-                        <div class="detail-box">
-                            <div class="cart-product-title">${title}</div>
-                            <p class="cart-desc">Here goes some description about this particular book. That defines why you should buy it.</p>
-                            <button class="cart-quantity cart-remove">Will read later</button>
-                        </div>
-                        <div class="cart-price">${price1}</div>`;
+        var detailBox = document.createElement("div");
+        detailBox.classList.add("detail-box");
 
-    cartbookbox.innerHTML = cartboxcontent;
-    cartitems.append(cartbookbox);
-    cartbookbox
-    .getElementsByClassName('cart-remove')[0]
-    .addEventListener('click',removeCartItem);
-    cartbookbox.
-    getElementsByClassName('cart-quantity')[0]
-    .addEventListener('change',quantitychanged);
+        var titleEl = document.createElement("div");
+        titleEl.classList.add("cart-product-title");
+        titleEl.textContent = title;
+        detailBox.appendChild(titleEl);
 
-     
+        var descEl = document.createElement("p");
+        descEl.classList.add("cart-desc");
+        descEl.textContent = "Here goes some description about this particular book. That defines why you should buy it.";
+        detailBox.appendChild(descEl);
+
+        var removeBtn = document.createElement("button");
+        removeBtn.classList.add("cart-quantity", "cart-remove");
+        removeBtn.textContent = "Will read later";
+        detailBox.appendChild(removeBtn);
+
+        cartbookbox.appendChild(detailBox);
+
+        var priceEl = document.createElement("div");
+        priceEl.classList.add("cart-price");
+        priceEl.textContent = price1;
+        cartbookbox.appendChild(priceEl);
+        cartitems.append(cartbookbox);
+        cartbookbox
+        .getElementsByClassName('cart-remove')[0]
+        .addEventListener('click',removeCartItem);
+        cartbookbox.
+        getElementsByClassName('cart-quantity')[0]
+        .addEventListener('change',quantitychanged);
 
     }
 
    
+
+
+
 
     function updatetotal(){
         var cartcontent=document.getElementsByClassName('cart-content')[0];
