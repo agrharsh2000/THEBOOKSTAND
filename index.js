@@ -21,8 +21,7 @@ closeCart.onclick=()=>{
     }
 
     function ready(){
-        var removeCartButtons=document.getElementsByClassName('cart-remove')
-        console.log(removeCartButtons);
+        var removeCartButtons=document.getElementsByClassName('cart-remove');
         for (var i=0;i< removeCartButtons.length;i++){
             var button=removeCartButtons[i];
             button.addEventListener('click',removeCartItem);
@@ -38,7 +37,9 @@ closeCart.onclick=()=>{
     {
         var button=addcart[i];
         button.addEventListener("click",addcartclicked);
+
     }
+    
     document.getElementsByClassName("btn-buy")[0].addEventListener("click",buybuttonclicked);
 }
 
@@ -68,13 +69,14 @@ function buybuttonclicked(){
     }
 
     function addcartclicked(event){
-        var button =event.target;
-        var shopproducts=button.parentElement;
-        var title=shopproducts.getElementsByClassName("product-title")[0].innerHTML;
-        var price=shopproducts.getElementsByClassName("price")[0].innerHTML;
-        var price1=price.replace("FROM","");
-        var productimg = shopproducts.getElementsByClassName("product-img")[0].src;
+        let button =event.target;
+        let shopproducts=button.parentElement.parentElement;
+        let title=shopproducts.getElementsByClassName("product-title")[0].innerHTML;
+        let price=shopproducts.getElementsByClassName("price")[0].innerHTML;
+        let price1=price.replace("FROM","");
+        let productimg = shopproducts.getElementsByClassName("product-img")[0].src;
        addproducttocart(title,price1, productimg);
+       console.log("heel")
        updatetotal();
     
     }
@@ -109,6 +111,9 @@ function buybuttonclicked(){
      
 
     }
+
+   
+
     function updatetotal(){
         var cartcontent=document.getElementsByClassName('cart-content')[0];
         var cartboxes=cartcontent.getElementsByClassName('cart-box');
@@ -119,8 +124,8 @@ function buybuttonclicked(){
             var cartbox=cartboxes[i];
             var pricelement=cartbox.getElementsByClassName('cart-price')[0];
             var price=parseFloat(pricelement.innerHTML.replace("$",""));
-
             total=total+price;
+            total=Math.round(total*100)/100;
         }
             document.getElementsByClassName('total-price')[0].innerHTML="$"+total;
     
